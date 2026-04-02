@@ -1,0 +1,41 @@
+# Keil/MDK/ARM build artefacts
+*.axf
+*.elf
+*.hex
+*.bin
+*.o
+*.obj
+*.d
+*.lst
+*.map
+*.lnp
+*.sct
+*.dep
+
+# Build directories
+build/
+MDK-ARM/BEST_USE/
+DebugConfig/
+RTE/
+
+# Keil project files (user / workspace-specific)
+*.uvprojx
+*.uvoptx
+*.uvguix.*
+*.uvprojx.*
+
+# Generated / intermediate files
+*.crf
+*.d
+
+# IDEs
+.vscode/
+.vs/
+.idea/
+
+# Logs
+*.log
+
+# OS files
+Thumbs.db
+.DS_Store
