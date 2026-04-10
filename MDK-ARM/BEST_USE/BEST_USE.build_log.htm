@@ -1,0 +1,93 @@
+<html>
+<body>
+<pre>
+<h1>�Vision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ��Vision V5.24.2.0
+Copyright (C) 2017 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 1 1907099043@qq.com, 1, LIC=D0D7S-LV7LD-LQI0Q-N18G2-0PQ1W-VBZ23
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.24.1
+Toolchain Path:  D:\K5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 5 (build 528)
+Assembler:       Armasm.exe V5.06 update 5 (build 528)
+Linker/Locator:  ArmLink.exe V5.06 update 5 (build 528)
+Library Manager: ArmAr.exe V5.06 update 5 (build 528)
+Hex Converter:   FromElf.exe V5.06 update 5 (build 528)
+CPU DLL:         SARMCM3.DLL V5.24.1
+Dialog DLL:      DCM.DLL V1.16.0.0
+Target DLL:      CMSIS_AGDI.dll V1.28.3.0
+Dialog DLL:      TCM.DLL V1.32.0.0
+ 
+<h2>Project:</h2>
+C:\Users\19070\Desktop\����\25G_NUEDC-main\MDK-ARM\BEST_USE.uvprojx
+Project File Date:  04/10/2026
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 5 (build 528)', folder: 'D:\K5\ARM\ARMCC\Bin'
+Build target 'BEST_USE'
+compiling amplitude_control.c...
+compiling main.c...
+../Core/MY_DSP/MY_5351/si5351_asserts.h(61): warning:  #1-D: last line of file ends without a newline
+  				
+../Core/Src/main.c(145): warning:  #47-D: incompatible redefinition of macro "SWEEP_STOP_FREQ_HZ"  (declared at line 10 of "../Core/Src/../MY_DSP/MY_DDS_FUN/9959_scan.h")
+  #define SWEEP_STOP_FREQ_HZ           200000U
+../Core/Src/main.c(146): warning:  #47-D: incompatible redefinition of macro "SWEEP_SETTLE_MS"  (declared at line 11 of "../Core/Src/../MY_DSP/MY_DDS_FUN/9959_scan.h")
+  #define SWEEP_SETTLE_MS              8U
+../Core/Src/main.c(152): warning:  #47-D: incompatible redefinition of macro "SWEEP_PRINT_VOFA"  (declared at line 16 of "../Core/Src/../MY_DSP/MY_DDS_FUN/9959_scan.h")
+  #define SWEEP_PRINT_VOFA             1U
+../Core/Src/main.c(170): warning:  #550-D: variable "debug_freq_val"  was set but never used
+  static uint32_t debug_freq_val = 0;     // Debug用：观测当前频率
+../Core/Src/main.c(171): warning:  #550-D: variable "debug_amp_code"  was set but never used
+  static uint32_t debug_amp_code = 0;     // Debug用：观测当前幅度码�?
+../Core/Src/main.c(172): warning:  #177-D: variable "g_sweep_freq"  was declared but never referenced
+  static uint32_t g_sweep_freq[SWEEP_POINT_COUNT];
+../Core/Src/main.c(173): warning:  #177-D: variable "g_sweep_level"  was declared but never referenced
+  static uint16_t g_sweep_level[SWEEP_POINT_COUNT];
+../Core/Src/main.c: 8 warnings, 0 errors
+linking...
+Program Size: Code=22948 RO-data=3192 RW-data=248 ZI-data=6120  
+FromELF: creating hex file...
+"BEST_USE\BEST_USE.axf" - 0 Error(s), 8 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.6.0.pack
+                ARM.CMSIS.5.6.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: DSP Variant: Source Version: 1.7.0
+   * Component: CORE Version: 5.3.0
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32F4xx_DFP.2.13.0.pack
+                Keil.STM32F4xx_DFP.2.13.0
+                STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_BEST_USE
+  D:\K5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include
+  D:\K5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Include
+  D:\K5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:DSP:Source:1.7.0
+      Source file:   CMSIS\DSP\Source\FastMathFunctions\FastMathFunctions.c
+      Source file:   CMSIS\DSP\Source\BasicMathFunctions\BasicMathFunctions.c
+      Source file:   CMSIS\DSP\Source\MatrixFunctions\MatrixFunctions.c
+      Source file:   CMSIS\DSP\Source\TransformFunctions\TransformFunctions.c
+      Source file:   CMSIS\DSP\Source\FilteringFunctions\FilteringFunctions.c
+      Source file:   CMSIS\DSP\Source\CommonTables\CommonTables.c
+      Source file:   CMSIS\DSP\Source\ControllerFunctions\ControllerFunctions.c
+      Source file:   CMSIS\DSP\Source\StatisticsFunctions\StatisticsFunctions.c
+      Source file:   CMSIS\DSP\Source\SupportFunctions\SupportFunctions.c
+      Include file:  CMSIS\DSP\Include\arm_math.h
+      Source file:   CMSIS\DSP\Source\ComplexMathFunctions\ComplexMathFunctions.c
+
+   * Component: ARM::CMSIS:CORE:5.3.0
+Build Time Elapsed:  00:00:03
+</pre>
+</body>
+</html>

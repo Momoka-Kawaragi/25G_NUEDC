@@ -1,0 +1,17 @@
+best_use\fastmathfunctions.o: D:\K5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Source\FastMathFunctions\FastMathFunctions.c
+best_use\fastmathfunctions.o: D:\K5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Source\FastMathFunctions\arm_cos_f32.c
+best_use\fastmathfunctions.o: D:\K5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Include\arm_math.h
+best_use\fastmathfunctions.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
+best_use\fastmathfunctions.o: D:\K5\ARM\ARMCC\Bin\..\include\stdint.h
+best_use\fastmathfunctions.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
+best_use\fastmathfunctions.o: D:\K5\ARM\ARMCC\Bin\..\include\string.h
+best_use\fastmathfunctions.o: D:\K5\ARM\ARMCC\Bin\..\include\math.h
+best_use\fastmathfunctions.o: D:\K5\ARM\ARMCC\Bin\..\include\float.h
+best_use\fastmathfunctions.o: D:\K5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Include\arm_common_tables.h
+best_use\fastmathfunctions.o: D:\K5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Source\FastMathFunctions\arm_cos_q15.c
+best_use\fastmathfunctions.o: D:\K5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Source\FastMathFunctions\arm_cos_q31.c
+best_use\fastmathfunctions.o: D:\K5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Source\FastMathFunctions\arm_sin_f32.c
+best_use\fastmathfunctions.o: D:\K5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Source\FastMathFunctions\arm_sin_q15.c
+best_use\fastmathfunctions.o: D:\K5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Source\FastMathFunctions\arm_sin_q31.c
+best_use\fastmathfunctions.o: D:\K5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Source\FastMathFunctions\arm_sqrt_q15.c
+best_use\fastmathfunctions.o: D:\K5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Source\FastMathFunctions\arm_sqrt_q31.c

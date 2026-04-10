@@ -1,0 +1,10 @@
+best_use\windowfunction.o: ..\Core\MY_DSP\MY_FFT\WindowFunction.c
+best_use\windowfunction.o: ..\Core\MY_DSP\MY_FFT\WindowFunction.h
+best_use\windowfunction.o: D:\K5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Include\arm_math.h
+best_use\windowfunction.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
+best_use\windowfunction.o: D:\K5\ARM\ARMCC\Bin\..\include\stdint.h
+best_use\windowfunction.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
+best_use\windowfunction.o: D:\K5\ARM\ARMCC\Bin\..\include\string.h
+best_use\windowfunction.o: D:\K5\ARM\ARMCC\Bin\..\include\math.h
+best_use\windowfunction.o: D:\K5\ARM\ARMCC\Bin\..\include\float.h
+best_use\windowfunction.o: D:\K5\ARM\ARMCC\Bin\..\include\stdlib.h
