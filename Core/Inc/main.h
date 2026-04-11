@@ -81,6 +81,10 @@ void Error_Handler(void);
 #define Relay_CH3_GPIO_Port GPIOB
 #define Relay_CH2_Pin GPIO_PIN_1
 #define Relay_CH2_GPIO_Port GPIOB
+#define switch1_Pin GPIO_PIN_8
+#define switch1_GPIO_Port GPIOD
+#define switch2_Pin GPIO_PIN_9
+#define switch2_GPIO_Port GPIOD
 #define TM1637_DIO_Pin GPIO_PIN_14
 #define TM1637_DIO_GPIO_Port GPIOD
 #define TM1637_CLK_Pin GPIO_PIN_15

@@ -65,11 +65,11 @@ void MX_GPIO_Init(void)
                           |PS1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, TM1637_DIO_Pin|TM1637_CLK_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOD, switch1_Pin|switch2_Pin|SDIO3_Pin|SDIO2_Pin
+                          |SCLK_Pin|SDIO1_Pin|CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, SDIO3_Pin|SDIO2_Pin|SCLK_Pin|SDIO1_Pin
-                          |CS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, TM1637_DIO_Pin|TM1637_CLK_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pins : WR_Pin D0_Pin D1_Pin A0_Pin
                            A1_Pin PS0_Pin */
@@ -98,10 +98,12 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : TM1637_DIO_Pin TM1637_CLK_Pin SDIO3_Pin SDIO2_Pin
-                           SCLK_Pin SDIO1_Pin CS_Pin */
-  GPIO_InitStruct.Pin = TM1637_DIO_Pin|TM1637_CLK_Pin|SDIO3_Pin|SDIO2_Pin
-                          |SCLK_Pin|SDIO1_Pin|CS_Pin;
+  /*Configure GPIO pins : switch1_Pin switch2_Pin TM1637_DIO_Pin TM1637_CLK_Pin
+                           SDIO3_Pin SDIO2_Pin SCLK_Pin SDIO1_Pin
+                           CS_Pin */
+  GPIO_InitStruct.Pin = switch1_Pin|switch2_Pin|TM1637_DIO_Pin|TM1637_CLK_Pin
+                          |SDIO3_Pin|SDIO2_Pin|SCLK_Pin|SDIO1_Pin
+                          |CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
