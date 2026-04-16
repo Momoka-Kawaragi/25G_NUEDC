@@ -19,8 +19,117 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "dac.h"
+#include "tim.h"
+#include <math.h>
 
 /* USER CODE BEGIN 0 */
+#ifndef PI
+#define PI 3.14159265358979323846f
+#endif
+
+/* Waveform buffer moved to file scope so it can be updated at runtime */
+static uint16_t sine_buf[DAC_TRI_SAMPLES];
+
+static uint32_t DAC_GetTim6ClockHz(void)
+{
+  uint32_t pclk1 = HAL_RCC_GetPCLK1Freq();
+  uint32_t ppre1 = RCC->CFGR & RCC_CFGR_PPRE1;
+  if (ppre1 == RCC_CFGR_PPRE1_DIV1)
+  {
+    return pclk1;
+  }
+  return pclk1 * 2U;
+}
+
+void DAC_StartSine(uint32_t freq_hz, uint32_t amplitude_pk_mv, uint32_t offset_mv, float phase_deg)
+{
+  /* Delegate to runtime updater which fills buffer and configures DMA/timer */
+  DAC_SetFrequencyAndPhase(freq_hz, amplitude_pk_mv, offset_mv, phase_deg);
+}
+
+void DAC_SetFrequencyAmplitude(uint32_t freq_hz, uint32_t amplitude_pk_mv, uint32_t offset_mv)
+{
+  DAC_SetFrequencyAndPhase(freq_hz, amplitude_pk_mv, offset_mv, 0.0f);
+}
+
+void DAC_SetFrequencyAndPhase(uint32_t freq_hz, uint32_t amplitude_pk_mv, uint32_t offset_mv, float phase_deg)
+{
+  uint32_t tim_clk;
+  uint32_t sample_rate_hz;
+  uint32_t period;
+  uint32_t center_code;
+  uint32_t delta_code;
+  uint32_t min_code;
+  uint32_t max_code;
+
+  if (freq_hz == 0U)
+  {
+    return;
+  }
+
+  /* Fill waveform buffer (12-bit centered around offset) */
+  center_code = (4095U * offset_mv) / DAC_TRI_VREF_MV;
+  delta_code = (4095U * amplitude_pk_mv) / DAC_TRI_VREF_MV;
+  min_code = (center_code > delta_code) ? (center_code - delta_code) : 0U;
+  max_code = center_code + delta_code;
+  if (max_code > 4095U)
+  {
+    max_code = 4095U;
+  }
+
+  float phase_rad = phase_deg * PI / 180.0f;
+  for (uint32_t i = 0; i < DAC_TRI_SAMPLES; i++)
+  {
+    float theta = 2.0f * PI * ((float)i / (float)DAC_TRI_SAMPLES) + phase_rad;
+    float s = sinf(theta);
+    int32_t code = (int32_t)center_code + (int32_t)(s * (float)delta_code);
+    if (code < (int32_t)min_code) code = (int32_t)min_code;
+    if (code > (int32_t)max_code) code = (int32_t)max_code;
+    sine_buf[i] = (uint16_t)code;
+  }
+
+  /* Configure timer and DMA */
+  sample_rate_hz = freq_hz * DAC_TRI_SAMPLES;
+  tim_clk = DAC_GetTim6ClockHz();
+  if (sample_rate_hz == 0U)
+  {
+    return;
+  }
+
+  period = tim_clk / sample_rate_hz;
+  if (period == 0U)
+  {
+    period = 1U;
+  }
+
+  htim6.Init.Prescaler = 0U;
+  htim6.Init.Period = period - 1U;
+  htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim6) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  (void)HAL_TIM_Base_Stop(&htim6);
+  (void)HAL_DAC_Stop_DMA(&hdac, DAC_CHANNEL_1);
+
+  if (HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, (uint32_t *)sine_buf, DAC_TRI_SAMPLES, DAC_ALIGN_12B_R) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  if (HAL_TIM_Base_Start(&htim6) != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
+void DAC_StartTriangle50k_2V(void)
+{
+  /* Keep compatibility with existing calls: 50kHz, 1.65V +/-1.0V sine output. Default 0 deg phase. */
+  DAC_StartSine(DAC_TRI_TARGET_HZ, DAC_TRI_PK_MV, DAC_TRI_OFFSET_MV, 0.0f);
+}
 
 /* USER CODE END 0 */
 
@@ -52,7 +161,7 @@ void MX_DAC_Init(void)
   /** DAC channel OUT1 config
   */
   sConfig.DAC_Trigger = DAC_TRIGGER_T6_TRGO;
-  sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;
+  sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_DISABLE;
   if (HAL_DAC_ConfigChannel(&hdac, &sConfig, DAC_CHANNEL_1) != HAL_OK)
   {
     Error_Handler();

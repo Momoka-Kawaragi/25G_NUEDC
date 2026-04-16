@@ -8,8 +8,8 @@
 #define UART1_DMA_RX_BUFFER_SIZE    512
 
 // UART2 环形缓冲区配置（串口屏双向通信）
-#define UART2_RING_BUFFER_SIZE      500    // 建议增大到1024以应对突发数据
-#define UART2_TX_BUFFER_SIZE        128
+#define UART2_RING_BUFFER_SIZE      1024    // 建议增大到1024以应对突发数据
+#define UART2_TX_BUFFER_SIZE        1024
 
 // UART3 阻塞发送配置
 #define UART3_TX_BUFFER_SIZE        256

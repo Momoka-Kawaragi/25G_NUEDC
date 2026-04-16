@@ -65,6 +65,7 @@ extern ADC_HandleTypeDef hadc1;
 #define CMD_STATE_ON           0x01
 #define DDS_STATE_1           1U
 #define DDS_STATE_2           2U
+#define DDS_STATE_3           3U  // 扫频状态
 #define DEFAULT_FREQUENCY_HZ  50000U
 #define DEFAULT_AMPLITUDE_VAL 1023U
 #define DEFAULT_PHASE_VAL     0U
@@ -130,16 +131,17 @@ static const GainTableEntry_2D_t g_gain_table_2d[GAIN_TABLE_2D_TOTAL] = {
 };
 
 // 扫频与特性提取参数（后续可通过串口配置）
-#define SWEEP_POINT_COUNT            80U
+#if 0
+#define SWEEP_POINT_COUNT            60U
 #define SWEEP_START_FREQ_HZ          1000U
-#define SWEEP_STOP_FREQ_HZ           200000U
-#define SWEEP_SETTLE_MS              8U
+#define SWEEP_STOP_FREQ_HZ           60000U
 #define SWEEP_SAMPLES_PER_POINT      32U
-#define SWEEP_OUTPUT_AMPLITUDE_CODE  600U
+#endif
+#define SWEEP_SETTLE_MS            100U
+#define SWEEP_OUTPUT_AMPLITUDE_CODE  1023U
 #define SWEEP_CHANNEL                0U
 #define SWEEP_ENABLE_DEMO            0U
 #define SWEEP_PRINT_TEXT             0U
-#define SWEEP_PRINT_VOFA             1U
 #define SWEEP_EDGE_AVG_POINTS        5U
 #define mode      2
 #define freq      2
@@ -199,6 +201,11 @@ static void Switch_SetByState(uint8_t state)
     HAL_GPIO_WritePin(switch1_GPIO_Port, switch1_Pin, GPIO_PIN_RESET);
     HAL_GPIO_WritePin(switch2_GPIO_Port, switch2_Pin, GPIO_PIN_SET);
   }
+  else if (state == DDS_STATE_3)
+  {
+    HAL_GPIO_WritePin(switch1_GPIO_Port, switch1_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(switch2_GPIO_Port, switch2_Pin, GPIO_PIN_SET);
+  }
 }
 
 static uint8_t Try_HandleScanIdentifyCommand(void)
@@ -206,13 +213,18 @@ static uint8_t Try_HandleScanIdentifyCommand(void)
   // 检查是否为命令 0x03。注意：gFrequencyCmd.frequency 也可能是 0x03（取决于发送端数据填充方式）
   if (gFrequencyCmd.cmd == CMD_SCAN_IDENTIFY_ALT)
   {
+    uint8_t prev_state = g_dds_state;
     const char *model_text = "SCAN_FAIL";
+    g_dds_state = DDS_STATE_3;
+    Switch_SetByState(g_dds_state);
     HMI_SetText("t9", "SCANNING");
     if (SCAN_RunAndExtract(&g_filter_feature) != 0U)
     {
       model_text = SCAN_ModelTypeToString(g_filter_feature.model_type);
     }
     HMI_SetText("t9", model_text);
+    g_dds_state = prev_state;
+    Switch_SetByState(g_dds_state);
     DDS_ApplyDefaultOutput();
     gFrequencyCmd.cmd = 0U;
     gFrequencyCmd.frequency = 0U;
@@ -309,6 +321,8 @@ int main(void)
   //si5351_Init();
   delay_init();
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+  /* Start DAC using configured target frequency and amplitude/offset. Default phase 0. */
+  DAC_StartSine(DAC_TRI_TARGET_HZ, DAC_TRI_PK_MV, DAC_TRI_OFFSET_MV, 0.0f);
 
   /* UART retarget test: should print to USART1 if retargeting works */
   printf("UART1 retarget test: Hello from USART1\r\n");
@@ -334,6 +348,9 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  /* Initial DAC Start: 1kHz Sine wave */
+  DAC_SetFrequencyAndPhase(1000, 1000, 1650, 0.0f);
+
   while (1)
   {
     Switch_SetByState(g_dds_state);

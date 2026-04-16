@@ -7,7 +7,7 @@ best_use\si5351.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
 best_use\si5351.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 best_use\si5351.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h
 best_use\si5351.o: ../Drivers/CMSIS/Include/core_cm4.h
-best_use\si5351.o: D:\K5\ARM\ARMCC\Bin\..\include\stdint.h
+best_use\si5351.o: C:\Users\32361\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 best_use\si5351.o: ../Drivers/CMSIS/Include/cmsis_version.h
 best_use\si5351.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 best_use\si5351.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -15,7 +15,7 @@ best_use\si5351.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 best_use\si5351.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 best_use\si5351.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 best_use\si5351.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-best_use\si5351.o: D:\K5\ARM\ARMCC\Bin\..\include\stddef.h
+best_use\si5351.o: C:\Users\32361\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 best_use\si5351.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 best_use\si5351.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
 best_use\si5351.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h
@@ -38,7 +38,7 @@ best_use\si5351.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 best_use\si5351.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 best_use\si5351.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 best_use\si5351.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
-best_use\si5351.o: D:\K5\ARM\ARMCC\Bin\..\include\math.h
+best_use\si5351.o: C:\Users\32361\AppData\Local\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 best_use\si5351.o: ../Core/MY_DSP/MY_5351/si5351.h
 best_use\si5351.o: ../Core/MY_DSP/MY_5351/si5351_errors.h
 best_use\si5351.o: ../Core/MY_DSP/MY_5351/si5351_asserts.h

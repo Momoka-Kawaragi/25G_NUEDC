@@ -5,19 +5,18 @@
 #include <stdint.h>
 
 /* Sweep configuration defaults (can be overridden before build) */
-#define SWEEP_POINT_COUNT            80U
+#define SWEEP_POINT_COUNT            501U
 #define SWEEP_START_FREQ_HZ          1000U
-#define SWEEP_STOP_FREQ_HZ           40000U
-#define SWEEP_SETTLE_MS             32U
-#define SWEEP_SAMPLES_PER_POINT      32U
-#define SWEEP_OUTPUT_AMPLITUDE_CODE  600U
+#define SWEEP_STOP_FREQ_HZ           100000U
+#define SWEEP_SETTLE_MS            100U
+#define SWEEP_SAMPLES_PER_POINT      64U
+#define SWEEP_OUTPUT_AMPLITUDE_CODE  1023U
 #define SWEEP_CHANNEL                0U
-#define SWEEP_PRINT_TEXT             0U
-#define SWEEP_PRINT_VOFA             0U
 #define SWEEP_EDGE_AVG_POINTS        5U
 /* Frequency step per point (Hz). Set to 1000 for 1 kHz increments. */
+/* Use 200 Hz step to increase resolution */
 #ifndef SWEEP_STEP_HZ
-#define SWEEP_STEP_HZ                1000U
+#define SWEEP_STEP_HZ                200U
 #endif
 
 typedef struct
