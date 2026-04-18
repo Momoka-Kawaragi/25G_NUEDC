@@ -60,12 +60,14 @@ extern ADC_HandleTypeDef hadc1;
 #define CMD_STATE1_CONTROL     0x04  // 状态1的原切换或控制位 (可根据需要调整)
 #define CMD_RESET_OUTPUT       0x09
 #define CMD_SCAN_IDENTIFY_ALT  0x05  // 扫频启动命令改为 0x05
+#define CMD_CLONE_MODE_START   0x06  // 切换到模式4（模仿输出）
 #define CMD_SCAN_IDENTIFY_ALT_START 0x05
 #define CMD_STATE_OFF          0x00
 #define CMD_STATE_ON           0x01
 #define DDS_STATE_1           1U
 #define DDS_STATE_2           2U
 #define DDS_STATE_3           3U  // 扫频状态
+#define DDS_STATE_4           4U  // 模仿输出模式 (发挥部分)
 #define DEFAULT_FREQUENCY_HZ  50000U
 #define DEFAULT_AMPLITUDE_VAL 1023U
 #define DEFAULT_PHASE_VAL     0U
@@ -206,6 +208,12 @@ static void Switch_SetByState(uint8_t state)
     HAL_GPIO_WritePin(switch1_GPIO_Port, switch1_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(switch2_GPIO_Port, switch2_Pin, GPIO_PIN_SET);
   }
+  else if (state == DDS_STATE_4)
+  {
+    // 模仿输出模式下的继电器/开关状态 (根据需要定义)
+    HAL_GPIO_WritePin(switch1_GPIO_Port, switch1_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(switch2_GPIO_Port, switch2_Pin, GPIO_PIN_RESET);
+  }
 }
 
 static uint8_t Try_HandleScanIdentifyCommand(void)
@@ -340,9 +348,8 @@ int main(void)
   AmplitudeControl_Init();  // ← 共享频率控制的PACK模板
 
   /* 配置内部采样（TIM3）并启动 FFT DMA 采样 */
-  /* FFT disabled for debug - do not start TIM3-triggered ADC DMA */
-  // Phase_Set_SamplingRate_Internal(400000U); // 设置 TIM3 触发频率为 400kHz
-  // FFT_App_Init();
+  Phase_Set_SamplingRate_Internal(400000U); // 设置 TIM3 触发频率为 400kHz
+  FFT_App_Init();
 
   /* USER CODE END 2 */
 
@@ -491,6 +498,101 @@ int main(void)
           gFrequencyCmd.cmd = 0;
           gFrequencyCmd.frequency = 0;
       }
+    }
+    else if (g_dds_state == DDS_STATE_4)
+    {
+       /* 状态 4：模仿输出 (发挥部分) */
+       /* 1. 切换通道：ADC1 -> IN0 (捕获发生器), ADC2 -> IN6 (捕获相位差) */
+       ADC1_SelectChannel(ADC_CHANNEL_0);
+       ADC2_SelectChannel(ADC_CHANNEL_6);
+       
+       /* 2. 执行 FFT 处理并手动计算/输出频率 */
+       FFT_App_Process(); 
+       
+       static float32_t freq_sum = 0;
+       static uint32_t freq_count = 0;
+       static uint32_t last_print = 0;
+
+       if (ADC_Flag == 0) // 说明一帧新的数据采样并计算完了
+       {
+           int max_idx = Find_nMax(FFT_OutputBuf);
+           float32_t freq_in = (float32_t)max_idx * SAMPLING_RATE / FFT_LENGTH;
+           
+           // 只要有新数据就进行累加，为平均值做准备
+           freq_sum += freq_in;
+           freq_count++;
+           
+           // 只有在计算完成后才允许再次采样（由你的逻辑决定是否需要手动切回采样状态）
+           // ADC_Flag = 1; // 如果需要立即开始下一轮采样，可以取消注释
+       }
+
+       // 打印逻辑独立于采样计数，严格按时间走
+       if (HAL_GetTick() - last_print >= 2000) 
+       {
+           if (freq_count > 0)
+           {
+               float32_t freq_avg = freq_sum / freq_count;
+               printf("%.2f\r\n", freq_avg);
+               
+               /* --- 模式4核心：频率驱动DAC/DDS模仿输出 --- */
+               // 1. 获取该频率在扫频中记录的幅值 (ADC原始值，对应输入端幅频特性)
+               uint16_t adc_level = SCAN_LookupLevelForFreq((uint32_t)freq_avg);
+               
+               // 2. 将 ADC 原始值映射到 DAC 或 DDS 的输出幅值
+               // 扫频时使用的是 SWEEP_OUTPUT_AMPLITUDE_CODE (1023)，
+               // 如果要在 DAC 上复现，可以根据 ADC 满量程 (4095) 对应关系进行比例缩放。
+               // 假设扫频时的输入信号在进入ADC前没经过增益调整，直接跟随幅频曲线：
+               uint32_t output_vpp_mv = (uint32_t)adc_level * 3300 / 4095; // 粗略转换
+               
+               // 3. 更新 DAC 和 AD9959
+               // AD9959 通道 0 输出该频率的正弦波 (如果是 100Hz-3kHz 范围内，幅值可由 GainTable_2D_Lookup 补偿)
+               uint16_t dds_code = GainTable_2D_Lookup((uint32_t)freq_avg, (uint16_t)output_vpp_mv);
+               if (dds_code == 0) dds_code = 1023; // 若超范围则用满幅度
+               
+               Write_Frequence(0, (uint32_t)freq_avg);
+               Write_Amplitude(0, dds_code);
+               AD9959_IO_Update();
+               
+               // 同时也让 STM32 内部 DAC 同频输出（如果需要的话，偏移 1.65V）
+               DAC_SetFrequencyAndPhase((uint32_t)freq_avg, (uint16_t)output_vpp_mv, 1650, 0.0f);
+           }
+           
+           // 清零统计量，进入下一个2秒周期
+           freq_sum = 0;
+           freq_count = 0;
+           last_print = HAL_GetTick();
+       }
+       
+       if (gFrequencyCmd.cmd == CMD_STATE1_CONTROL && (uint8_t)gFrequencyCmd.frequency == CMD_STATE_ON)
+       {
+         g_dds_state = DDS_STATE_1;
+         Switch_SetByState(g_dds_state);
+         gFrequencyCmd.cmd = 0;
+         gFrequencyCmd.frequency = 0;
+       }
+       else if (gFrequencyCmd.cmd == CMD_CLONE_MODE_START && (uint8_t)gFrequencyCmd.frequency == CMD_STATE_ON)
+       {
+         // 接收到 55 06 01 FF 时退出状态4，回到状态1
+         g_dds_state = DDS_STATE_1;
+         Switch_SetByState(g_dds_state);
+         HMI_SetText("t10", "MODE: BASE");
+         gFrequencyCmd.cmd = 0;
+         gFrequencyCmd.frequency = 0;
+       }
+    }
+
+    /* 全局命令处理 */
+    if (gFrequencyCmd.cmd == CMD_CLONE_MODE_START)
+    {
+      if ((uint8_t)gFrequencyCmd.frequency == CMD_STATE_OFF) 
+      {
+        // 接收到 55 06 00 FF 进入状态4
+        g_dds_state = DDS_STATE_4;
+        Switch_SetByState(g_dds_state);
+        HMI_SetText("t10", "MODE: CLONE");
+      }
+      gFrequencyCmd.cmd = 0;
+      gFrequencyCmd.frequency = 0;
     }
 
     if (gFrequencyCmd.cmd == CMD_RESET_OUTPUT)

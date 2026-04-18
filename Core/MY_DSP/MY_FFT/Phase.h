@@ -31,7 +31,7 @@ extern "C" {
  * @brief FFT变换长度
  * @note  支持64, 128, 256, 512, 1024, 2048, 4096
  */
-#define FFT_LENGTH          1024
+#define FFT_LENGTH          2048
 
 /**
  * @brief  系统配置宏
@@ -51,7 +51,7 @@ extern float32_t SAMPLING_RATE;
 
 /* 测试宏定义 (取消注释以启用) */
 // #define FFT_TEST_SIMULATION       // 启用内部模拟信号生成(无需外部信号源)
-#define FFT_OUTPUT_FULL_SPECTRUM  // 启用全频谱输出
+// #define FFT_OUTPUT_FULL_SPECTRUM  // 启用全频谱输出
 // #define FFT_OUTPUT_BINARY         // 启用二进制(JustFloat)格式输出，需配合VOFA+使用
 
 

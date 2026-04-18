@@ -1,7 +1,7 @@
 Dependencies for Project 'BEST_USE', Target 'BEST_USE': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
 F (startup_stm32f407xx.s)(0x69D8A6A6)(--cpu Cortex-M4.fp.sp -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_BEST_USE-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\32361\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include--pd "__UVISION_VERSION SETA 542" --pd "STM32F407xx SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f407xx.lst --xref -o best_use\startup_stm32f407xx.o --depend best_use\startup_stm32f407xx.d)
-F (../Core/Src/main.c)(0x69DF9D04)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Core/MY_DSP/MY_5351 -I ../Core/MY_DSP/MY_Shuma -I ../Core/MY_DSP/MY_DDS -I ..\Core\MY_DSP\MY_Uart-I.\RTE\_BEST_USE-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\32361\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_M-o best_use\main.o --omf_browse best_use\main.crf --depend best_use\main.d)
+F (../Core/Src/main.c)(0x69E0CA32)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Core/MY_DSP/MY_5351 -I ../Core/MY_DSP/MY_Shuma -I ../Core/MY_DSP/MY_DDS -I ..\Core\MY_DSP\MY_Uart-I.\RTE\_BEST_USE-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\32361\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_M-o best_use\main.o --omf_browse best_use\main.crf --depend best_use\main.d)
 I (../Core/Inc/main.h)(0x69D8E77C)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x69D8A6A6)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69D8A6A2)
@@ -40,7 +40,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x69D8A6A6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x69D8A6A6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x69D8A6A6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x69D8A6A6)
-I (../Core/Inc/adc.h)(0x69D8A6A2)
+I (../Core/Inc/adc.h)(0x69E0C2EC)
 I (../Core/Inc/dac.h)(0x69DF9A86)
 I (../Core/Inc/dma.h)(0x69D8A6A2)
 I (../Core/Inc/i2c.h)(0x69D8A6A2)
@@ -58,8 +58,8 @@ I (../Core/MY_DSP/MY_5351/si5351_asserts.h)(0x69D8A6A2)
 I (../Core/MY_DSP/MY_DDS/ad9959.h)(0x69D8A6A2)
 I (../Core/Src/../MY_DSP/MY_Uart/frequency_control.h)(0x69D8A6A2)
 I (../Core/Src/../MY_DSP/MY_Uart/amplitude_control.h)(0x69D8D5B2)
-I (../Core/Src/../MY_DSP/MY_DDS_FUN/9959_scan.h)(0x69DF93D3)
-I (../Core/Src/../MY_DSP/MY_FFT/Phase.h)(0x69D8A6A2)
+I (../Core/Src/../MY_DSP/MY_DDS_FUN/9959_scan.h)(0x69E0CA32)
+I (../Core/Src/../MY_DSP/MY_FFT/Phase.h)(0x69E0C957)
 I (C:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\arm_math.h)(0x66A6B132)
 I (C:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\arm_math_types.h)(0x66A6B132)
 I (C:\Users\32361\AppData\Local\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
@@ -131,8 +131,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x69D8A6A6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x69D8A6A6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x69D8A6A6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x69D8A6A6)
-F (../Core/Src/adc.c)(0x69D8A6A2)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Core/MY_DSP/MY_5351 -I ../Core/MY_DSP/MY_Shuma -I ../Core/MY_DSP/MY_DDS -I ..\Core\MY_DSP\MY_Uart-I.\RTE\_BEST_USE-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\32361\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_M-o best_use\adc.o --omf_browse best_use\adc.crf --depend best_use\adc.d)
-I (../Core/Inc/adc.h)(0x69D8A6A2)
+F (../Core/Src/adc.c)(0x69E0C2EC)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Core/MY_DSP/MY_5351 -I ../Core/MY_DSP/MY_Shuma -I ../Core/MY_DSP/MY_DDS -I ..\Core\MY_DSP\MY_Uart-I.\RTE\_BEST_USE-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\32361\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_M-o best_use\adc.o --omf_browse best_use\adc.crf --depend best_use\adc.d)
+I (../Core/Inc/adc.h)(0x69E0C2EC)
 I (../Core/Inc/main.h)(0x69D8E77C)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x69D8A6A6)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69D8A6A2)
@@ -1815,8 +1815,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x69D8A6A6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x69D8A6A6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x69D8A6A6)
 F (..\Core\MY_DSP\MY_Uart\amplitude_control.h)(0x69D8D5B2)()
-F (..\Core\MY_DSP\MY_DDS_FUN\9959_scan.c)(0x69E08133)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Core/MY_DSP/MY_5351 -I ../Core/MY_DSP/MY_Shuma -I ../Core/MY_DSP/MY_DDS -I ..\Core\MY_DSP\MY_Uart-I.\RTE\_BEST_USE-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\32361\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_M-o best_use\9959_scan.o --omf_browse best_use\9959_scan.crf --depend best_use\9959_scan.d)
-I (..\Core\MY_DSP\MY_DDS_FUN\9959_scan.h)(0x69DF93D3)
+F (..\Core\MY_DSP\MY_DDS_FUN\9959_scan.c)(0x69E0E7CA)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Core/MY_DSP/MY_5351 -I ../Core/MY_DSP/MY_Shuma -I ../Core/MY_DSP/MY_DDS -I ..\Core\MY_DSP\MY_Uart-I.\RTE\_BEST_USE-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\32361\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_M-o best_use\9959_scan.o --omf_browse best_use\9959_scan.crf --depend best_use\9959_scan.d)
+I (..\Core\MY_DSP\MY_DDS_FUN\9959_scan.h)(0x69E0CA32)
 I (C:\Users\32361\AppData\Local\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (../Core/MY_DSP/MY_DDS/ad9959.h)(0x69D8A6A2)
 I (../Core/Inc/main.h)(0x69D8E77C)
@@ -1856,7 +1856,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x69D8A6A6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x69D8A6A6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x69D8A6A6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x69D8A6A6)
-I (../Core/Inc/adc.h)(0x69D8A6A2)
+I (../Core/Inc/adc.h)(0x69E0C2EC)
 I (../Core/Inc/tim.h)(0x69D8A6A2)
 I (../Core/Inc/usart.h)(0x69D8A6A2)
 I (../Core/MY_DSP/MY_Shuma/delay.h)(0x69D8A6A2)
@@ -1865,8 +1865,8 @@ I (..\Core\MY_DSP\MY_Uart\ZPN_Uart_Config.h)(0x69DF93E3)
 I (..\Core\MY_DSP\MY_Uart\ZPN_Uart.h)(0x69D8A6A2)
 I (..\Core\MY_DSP\MY_Uart\ZPN_Hmi_Pack.h)(0x69D8A6A2)
 I (C:\Users\32361\AppData\Local\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
-F (..\Core\MY_DSP\MY_FFT\Phase.c)(0x69D8A6A2)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Core/MY_DSP/MY_5351 -I ../Core/MY_DSP/MY_Shuma -I ../Core/MY_DSP/MY_DDS -I ..\Core\MY_DSP\MY_Uart-I.\RTE\_BEST_USE-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\32361\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_M-o best_use\phase.o --omf_browse best_use\phase.crf --depend best_use\phase.d)
-I (..\Core\MY_DSP\MY_FFT\Phase.h)(0x69D8A6A2)
+F (..\Core\MY_DSP\MY_FFT\Phase.c)(0x69E0C8D5)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Core/MY_DSP/MY_5351 -I ../Core/MY_DSP/MY_Shuma -I ../Core/MY_DSP/MY_DDS -I ..\Core\MY_DSP\MY_Uart-I.\RTE\_BEST_USE-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\32361\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_M-o best_use\phase.o --omf_browse best_use\phase.crf --depend best_use\phase.d)
+I (..\Core\MY_DSP\MY_FFT\Phase.h)(0x69E0C957)
 I (../Core/Inc/main.h)(0x69D8E77C)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x69D8A6A6)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x69D8A6A2)
@@ -1934,7 +1934,7 @@ I (C:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\arm_const
 I (C:\Users\32361\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\arm_common_tables.h)(0x66A6B132)
 I (C:\Users\32361\AppData\Local\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (..\Core\MY_DSP\MY_FFT\WindowFunction.h)(0x69D8A6A2)
-I (../Core/Inc/adc.h)(0x69D8A6A2)
+I (../Core/Inc/adc.h)(0x69E0C2EC)
 I (../Core/Inc/tim.h)(0x69D8A6A2)
 I (../Core/MY_DSP/MY_5351/si5351.h)(0x69D8A6A2)
 I (../Core/MY_DSP/MY_5351/si5351_errors.h)(0x69D8A6A2)

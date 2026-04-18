@@ -41,7 +41,24 @@ static uint16_t SCAN_ReadAdcAverage(ADC_HandleTypeDef *hadc, uint16_t sample_cou
     HAL_ADC_Stop(hadc);
   }
 
-  return (uint16_t)(sum / sample_count);
+  return (uint16_t)(sum / (uint32_t)sample_count);
+}
+
+uint16_t SCAN_LookupLevelForFreq(uint32_t freq_hz)
+{
+  uint16_t idx = 0;
+  if (freq_hz <= SWEEP_START_FREQ_HZ) return g_sweep_level[0];
+  
+#ifdef SWEEP_STEP_HZ
+  idx = (freq_hz - SWEEP_START_FREQ_HZ) / SWEEP_STEP_HZ;
+#else
+  if (SWEEP_STOP_FREQ_HZ > SWEEP_START_FREQ_HZ) {
+    idx = (uint16_t)((uint64_t)(freq_hz - SWEEP_START_FREQ_HZ) * (SWEEP_POINT_COUNT - 1U) / (SWEEP_STOP_FREQ_HZ - SWEEP_START_FREQ_HZ));
+  }
+#endif
+
+  if (idx >= SWEEP_POINT_COUNT) idx = SWEEP_POINT_COUNT - 1;
+  return g_sweep_level[idx];
 }
 
 const char *SCAN_ModelTypeToString(uint8_t model_type)
@@ -77,6 +94,8 @@ uint8_t SCAN_RunAndExtract(FilterFeature_t *feature)
   Write_Amplitude(SWEEP_CHANNEL, SWEEP_OUTPUT_AMPLITUDE_CODE);
   Write_Phase(SWEEP_CHANNEL, 0U);
   AD9959_IO_Update();
+
+  ADC2_SelectChannel(ADC_CHANNEL_1);
 
   for (uint16_t i = 0; i < SWEEP_POINT_COUNT; i++)
   {

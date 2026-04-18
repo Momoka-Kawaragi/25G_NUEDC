@@ -344,7 +344,7 @@ void FFT_App_Process(void)
              float32_t freq = (float32_t)max_idx * SAMPLING_RATE / FFT_LENGTH;
              float32_t mag = FFT_OutputBuf[max_idx];
              
-             printf("Peak Freq: %.1f Hz, Mag: %.3f V\n", freq, mag);
+             // printf("Peak Freq: %.1f Hz, Mag: %.3f V\n", freq, mag);
         }
 #endif
         
@@ -505,6 +505,13 @@ void Process_ADC_RawData(void)
 float32_t Get_PhaseDifference(void)
 {
   float32_t phase1, phase2, phase_diff;
+
+  // 触发一次新的采集
+  ADC_COMPLETED = 0;
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t *)ADC_1_Value_DMA, FFT_LENGTH);
+#if USE_DUAL_ADC == 1
+  HAL_ADC_Start_DMA(&hadc2, (uint32_t *)ADC_2_Value_DMA, FFT_LENGTH);
+#endif
   
   // 等待数据采集完成（带有超时机制）
   // 1024点 @ 20kHz 约需 51.2ms。使用HAL_GetTick更准确，超时设为100ms

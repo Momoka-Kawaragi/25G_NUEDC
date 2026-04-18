@@ -47,4 +47,7 @@ uint8_t SCAN_RunAndExtract(FilterFeature_t *feature);
 /* Convert model type enum to short text for UI display. */
 const char *SCAN_ModelTypeToString(uint8_t model_type);
 
+/* Lookup sweep results for a given frequency. Returns ADC level. */
+uint16_t SCAN_LookupLevelForFreq(uint32_t freq_hz);
+
 #endif /* __9959_SCAN_H__ */
